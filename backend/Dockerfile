@@ -78,4 +78,4 @@ EXPOSE 3000
 
 
 
-CMD ["node", "dist/main"] Z
+CMD ["node", "dist/main"] 
