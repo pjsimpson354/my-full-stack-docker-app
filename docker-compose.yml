@@ -2,11 +2,7 @@ services:
 
   nginx:
 
-    build:
-
-      context: ./nginx
-
-      dockerfile: Dockerfile
+    image: nginx:alpine
 
     container_name: nginx-container
 
@@ -14,11 +10,19 @@ services:
 
       - "80:80"
 
+    volumes:
+
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+
     depends_on:
 
       - frontend
 
-      - backend
+      - backend-1
+
+      - backend-2
+
+
 
   frontend:
 
@@ -30,7 +34,9 @@ services:
 
     container_name: frontend-container
 
-  backend:
+
+
+  backend-1:
 
     build:
 
@@ -38,4 +44,16 @@ services:
 
       dockerfile: Dockerfile
 
-    container_name: backend-container
+    container_name: backend-container-1
+
+
+
+  backend-2:
+
+    build:
+
+      context: ./backend
+
+      dockerfile: Dockerfile
+
+    container_name: backend-container-2
